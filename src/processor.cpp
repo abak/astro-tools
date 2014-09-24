@@ -15,3 +15,16 @@ processor::~processor()
 {
 
 }
+
+void processor::display()const 
+{
+    cv::imshow("high_res", high_res);
+    cv::imshow("low res", lo_res);
+
+    cv::waitKey();
+
+    return;
+}
+
+
+

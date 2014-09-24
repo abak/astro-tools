@@ -24,5 +24,8 @@ int main (int argc, char* argv[])
     processor processor(options.get<std::string>(keys::high_res_input),
                         options.get<std::string>(keys::low_res_input));
 
+
+    processor.display();
+
     return 0;
 }

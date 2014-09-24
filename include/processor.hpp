@@ -14,6 +14,10 @@ namespace blender
                   const std::string& lo_res_path);
         ~processor();
 
+        void display() const ;
+
+        void preprocess();
+
     private:
         cv::Mat high_res;
         cv::Mat lo_res;
