@@ -19,6 +19,9 @@ find_package(OpenCV REQUIRED)
 
 include_directories(include)
 
-file(GLOB sources src/*.cpp src/*.hpp)
+set(sources
+    src/main.cpp
+    src/options.cpp)
+
 add_executable(blender ${sources})
 target_link_libraries(blender ${OpenCV_LIBS} ${Boost_LIBRARIES})
