@@ -19,7 +19,7 @@ namespace blender
         void preprocess();
 
     private:
-        cv::Mat high_res;
+        cv::Mat hi_res;
         cv::Mat lo_res;
         cv::Mat result;
     };
