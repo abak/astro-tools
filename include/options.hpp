@@ -17,6 +17,7 @@ namespace blender
     {
         const std::string high_res_input = "high_res";
         const std::string low_res_input  = "low_res";
+        const std::string output_file    = "output";
     }
 
     struct Options
