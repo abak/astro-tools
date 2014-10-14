@@ -18,6 +18,11 @@ namespace blender
 
         void run();
 
+        const cv::Mat& get_output()const
+        {
+            return result;
+        }
+
     private:
         cv::Mat hi_res;
         cv::Mat lo_res;
