@@ -1,6 +1,7 @@
 #include <log.hpp>
 #include <options.hpp>
 #include <processor.hpp>
+#include <opencv2/highgui.hpp>
 
 
 #include <string>
@@ -26,8 +27,9 @@ int main (int argc, char* argv[])
 
     processor.run();
 
-
     processor.display();
+
+    imwrite(options.get<std::string>(keys::output_file), processor.get_output());
 
     return 0;
 }
