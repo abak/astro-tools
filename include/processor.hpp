@@ -16,7 +16,7 @@ namespace blender
 
         void display() const ;
 
-        void preprocess();
+        void run();
 
     private:
         cv::Mat hi_res;

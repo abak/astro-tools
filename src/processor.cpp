@@ -2,6 +2,7 @@
 
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
+#include <opencv2/photo.hpp>
 
 using namespace blender;
 
@@ -24,7 +25,7 @@ processor::~processor()
 
 }
 
-void processor::preprocess()
+void processor::run()
 {
     if(hi_res.size() != lo_res.size())
     {
@@ -32,6 +33,16 @@ void processor::preprocess()
         cv::resize(lo_res, temp, temp.size());
         lo_res = temp;
     }
+
+    cv::Mat mask(hi_res.size(), CV_8UC1);
+    for(int j = 1 ; j < hi_res.rows - 1; ++j)
+        for(int i = 1 ; i < hi_res.cols - 1 ; ++i)
+            mask.at<unsigned char>(j, i) = 255;
+
+    cv::Point p;
+    p.x = hi_res.size().width/2;
+    p.y = hi_res.size().height/2;
+    cv::seamlessClone(hi_res, lo_res, mask, p, result, cv::NORMAL_CLONE);
 }
 
 
@@ -46,6 +57,7 @@ void processor::display()const
     {
         cv::imshow("high_res", hi_res);
         cv::imshow("low res", lo_res);
+        cv::imshow("result", result);
     }
     else
     {
@@ -54,12 +66,15 @@ void processor::display()const
         cv::Size new_size(hi_res.size().width * mult, hi_res.size().width * mult);
         cv::Mat hi_res_resize(new_size, hi_res.type());
         cv::Mat lo_res_resize(new_size, lo_res.type());
+        cv::Mat result_resize(new_size, result.type());
 
         cv::resize(hi_res, hi_res_resize, new_size);
         cv::resize(lo_res, lo_res_resize, new_size);
+        cv::resize(result, result_resize, new_size);
 
         cv::imshow("high_res", hi_res_resize);
         cv::imshow("low res", lo_res_resize);
+        cv::imshow("result", result_resize);
     }
 
     cv::waitKey();
