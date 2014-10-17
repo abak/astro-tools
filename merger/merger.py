@@ -3,18 +3,12 @@
 import numpy as np
 import cv2
 
-from os import listdir
-from os.path import isfile, join
+from os.path import join
 import argparse
 
 """this scripts is here only to merge all the hi resolution images 
 contained in one folder of the DSS survey into one big, resulting image.
 This should be ported to a more efficient language"""
-
-
-
-def list_directory(path): 
-    return  sorted([ join(path, f) for f in listdir(path) if isfile(join(path,f)) ])
 
 
 def merge_files(files, resize):
@@ -42,6 +36,8 @@ if __name__ == '__main__':
   parser.add_argument("-o", "--output", help="path to the output image", required=True)
   parser.add_argument("-r", "--resize", action="store_true", help="if set, will resize the output image down to 1920x1920")
   args = parser.parse_args()
-  file_list = list_directory(args.input)
+
+  file_list = open_input(args.input)
+
   result = merge_files(file_list, args.resize)
   cv2.imwrite(join(path, args.output), result)
